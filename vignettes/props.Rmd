@@ -1,0 +1,88 @@
+---
+title: "PRObabilistic Pathway Scores (PROPS)"
+author: "Lichy Han"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{PRObabilistic Pathway Scores (PROPS)}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+This R package calculates PRObabilistic Pathway Scores (PROPS), which are pathway-based features, from gene-based data. For more information, see:
+
+Lichy Han, Mateusz Maciejewski, Christoph Brockel, William Gordon, Scott B. Snapper, Joshua R. Korzenik, Lovisa Afzelius, Russ B. Altman. A PRObabilistic Pathway Score (PROPS) for Classification with Applications to Inflammatory Bowel Disease. 
+
+
+## Example Data
+In the package, example healthy data and patient data are included. Note that each data frame is patient x gene, and the column names are by gene Entrez ID.
+```{r, include = FALSE}
+library(PROPS)
+```
+
+```{r, results=FALSE}
+data(example_healthy)
+example_healthy[1:5,1:5]
+```
+```{r, echo = FALSE, results = 'asis'}
+knitr::kable(example_healthy[1:5,1:5])
+```
+```{r, results=FALSE}
+data(example_data)
+example_data[1:5,1:5]
+```
+```{r, echo = FALSE, results='asis'}
+knitr::kable(example_data[1:5,1:5])
+```
+
+
+## Calculating PROPS using KEGG
+KEGG edges have been included as part of this package, and will be used by default. To run PROPS, simply call the props command with the healthy data and the disease data.
+
+```{r, results=FALSE}
+props_features <- props(example_healthy, example_data)
+props_features[1:5,1:5]
+```
+```{r, echo = FALSE, results='asis'}
+knitr::kable(props_features[1:5,1:5])
+```
+
+## Optional Batch Correction
+
+As part of this package, we have included an optional flag to use ComBat via the sva package. Let us have two batches of data, where the first 50 samples from example_healthy and first 20 samples from example_data are from batch 1, and the remaining are from batch 2. Run the props command with batch_correct as TRUE, followed by the batch numbers.
+
+```{r, results = FALSE}
+healthy_batches = c(rep(1, 50), rep(2, 50))
+dat_batches = c(rep(1, 20), rep(2, 30))
+
+props_features_batchcorrected <- props(example_healthy, example_data, batch_correct = TRUE, healthy_batches = healthy_batches, dat_batches = dat_batches)
+props_features_batchcorrected[1:5,1:5]
+```
+
+```{r, echo = FALSE, results='asis'}
+knitr::kable(props_features_batchcorrected[1:5,1:5])
+```
+
+
+## Calculating PROPS using User Input Pathways
+A user can also input his or her own pathways, and thus our package is compatible with additional pathway databases and hand-curated pathways from literature or data. To do so, one needs to format the pathways into three columns, where the first column is the source or "from" node of the edge, the second column is the sink or "to" node of the edge, and the third column is the pathway ID (e.g. "glucose_metabolism").
+
+```{r, results = FALSE}
+data(example_edges)
+example_edges[1:8, ]
+```
+```{r, echo = FALSE, results='asis'}
+knitr::kable(example_edges[1:8, ])
+```
+
+Run props with the user specified edges as follows:
+
+```{r, results = FALSE}
+props_features_userpathways <- props(example_healthy, example_data, pathway_edges = example_edges)
+props_features_userpathways[,1:5]
+```
+```{r, echo = FALSE, results='asis'}
+knitr::kable(props_features_userpathways[,1:5])
+```
+
+

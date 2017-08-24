@@ -1,0 +1,14 @@
+Package: PROPS
+Type: Package
+Title: PRObabilistic Pathway Score (PROPS)
+Version: 0.99.0
+Date: 2017-08-16
+Author: Lichy Han
+Maintainer: Lichy Han <lhan2@stanford.edu>
+Description: Calculates probabilistic pathway scores using gene expression data.
+License: GPL-2
+Depends: bnlearn, reshape2, sva
+NeedsCompilation: no
+Suggests: knitr, rmarkdown
+VignetteBuilder: knitr
+Packaged: 2017-08-24 18:11:54 UTC; lichy
