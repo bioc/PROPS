@@ -1,5 +1,5 @@
 props <-
-function(healthy_dat, dat, pathway_edges = NULL, batch_correct = FALSE, healthy_batches = NULL, dat_batches = NULL){
+function(healthy_dat, dat, pathway_edges = NULL, batch_correct = F, healthy_batches = NULL, dat_batches = NULL){
   
   #check if user wants to batch correct
   if(batch_correct){
