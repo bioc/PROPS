@@ -51,7 +51,7 @@ function(healthy_dat, dat, pathway_edges = NULL, batch_correct = FALSE, healthy_
   healthy_dat <- healthy_dat[,colnames(healthy_dat) %in% common]
   dat <- dat[,colnames(dat) %in% common]
   
-  LL <- data.frame(stringsAsFactors = F)
+  LL <- data.frame(stringsAsFactors = FALSE)
   all_pathways = unique(pathway_edges[,3])
   for (i in 1:length(all_pathways)){
     edgelist <- pathway_edges[pathway_edges[,3] == all_pathways[i],]
@@ -59,11 +59,11 @@ function(healthy_dat, dat, pathway_edges = NULL, batch_correct = FALSE, healthy_
     edgelist <- edgelist[(edgelist[,2] %in% colnames(healthy_dat)) & (edgelist[,1] %in% colnames(healthy_dat)),]
     
     if(nrow(edgelist) > 0){ #proceed only if pathway has at least one edge
-      ordering <- sample(1:nrow(edgelist), nrow(edgelist), replace = F)
+      ordering <- sample(1:nrow(edgelist), nrow(edgelist), replace = FALSE)
       pathway_graph <- empty.graph(unique(c(edgelist[,1], edgelist[,2])))
       for (j in ordering){
         pathway_graph <- tryCatch({ #add edges in random order, exclude cycles
-          set.arc(pathway_graph, from = edgelist[j, 1], to = edgelist[j, 2], debug = F)
+          set.arc(pathway_graph, from = edgelist[j, 1], to = edgelist[j, 2], debug = FALSE)
         }, error = function(err) {pathway_graph})
       }
       
