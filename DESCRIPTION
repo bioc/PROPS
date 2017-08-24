@@ -11,4 +11,5 @@ Depends: bnlearn, reshape2, sva
 NeedsCompilation: no
 Suggests: knitr, rmarkdown
 VignetteBuilder: knitr
+biocViews: Classification, Bayesian, GeneExpression
 Packaged: 2017-08-24 18:11:54 UTC; lichy
