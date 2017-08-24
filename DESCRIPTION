@@ -7,7 +7,6 @@ Author: Lichy Han
 Maintainer: Lichy Han <lhan2@stanford.edu>
 Description: Calculates probabilistic pathway scores using gene expression data.
 License: GPL-2
-Imports: bnlearn, reshape2, sva
 NeedsCompilation: no
 Suggests: knitr, rmarkdown
 VignetteBuilder: knitr

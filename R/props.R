@@ -1,5 +1,5 @@
 props <-
-function(healthy_dat, dat, pathway_edges = NULL, batch_correct = F, healthy_batches = NULL, dat_batches = NULL){
+function(healthy_dat, dat, pathway_edges = NULL, batch_correct = FALSE, healthy_batches = NULL, dat_batches = NULL){
   
   #check if user wants to batch correct
   if(batch_correct){
@@ -71,7 +71,7 @@ function(healthy_dat, dat, pathway_edges = NULL, batch_correct = F, healthy_batc
       pathway_bn <- bn.fit(pathway_graph, as.data.frame(healthy_dat[,colnames(healthy_dat) %in% c(edgelist[,1], edgelist[,2])]))
       sample_LL <- logLik(pathway_bn, dat[,colnames(dat) %in% c(edgelist[,1], edgelist[,2])], by.sample = TRUE)
       if (!is.na(sum(sample_LL))){
-        LL <- rbind(LL, data.frame(pathway_ID = all_pathways[i], t(sample_LL), stringsAsFactors = F))
+        LL <- rbind(LL, data.frame(pathway_ID = all_pathways[i], t(sample_LL), stringsAsFactors = FALSE))
       }
     }
     
