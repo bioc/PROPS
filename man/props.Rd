@@ -8,7 +8,7 @@ PRObabilistic Pathway Scores (PROPS)
 Calculates PRObabilistic Pathway Scores (PROPS), which are pathway-based features, from gene-based data.
 }
 \usage{
-props(healthy_dat, dat, pathway_edges = NULL)
+props(healthy_dat, dat, pathway_edges = NULL, batch_correct = FALSE, healthy_batches = NULL, dat_batches = NULL)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
