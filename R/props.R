@@ -4,17 +4,17 @@ function(healthy_dat, dat, pathway_edges = NULL, batch_correct = FALSE, healthy_
   #check if user wants to batch correct
   if(batch_correct){
     if(is.null(dat_batches)){
-      stop("Error: Data batches not provided.")
+      stop("Data batches not provided.")
     }else if(!is.numeric(dat_batches)){
-      stop("Error: Data batches are not numeric.")
+      stop("Data batches are not numeric.")
     }else if(length(dat_batches) != nrow(dat)){
-      stop("Error: Data batches length does not match number of samples in data.")
+      stop("Data batches length does not match number of samples in data.")
     }else if(is.null(healthy_batches)){
-      stop("Error: Healthy data batches not provided.")
+      stop("Healthy data batches not provided.")
     }else if(!is.numeric(healthy_batches)){
-      stop("Error: Healthy data batches are not numeric.")
+      stop("Healthy data batches are not numeric.")
     }else if(length(healthy_batches) != nrow(healthy_dat)){
-      stop("Error: Healthy data batches length does not match number of samples in healthy data.")
+      stop("Healthy data batches length does not match number of samples in healthy data.")
     }else{
       data_combat <- ComBat(t(rbind(healthy_dat, dat)), batch = c(healthy_batches, dat_batches))
       data_combat <- t(data_combat)
@@ -31,12 +31,24 @@ function(healthy_dat, dat, pathway_edges = NULL, batch_correct = FALSE, healthy_
     stop("Error: Pathway edges provided are not in a data frame.")
   }
   
-  #check for data frames
-  if(!is.data.frame(healthy_dat)){
-    stop("Error: Healthy data provided is not a data frame.")
+  #check for data structure and gene IDs
+  if(!(is(healthy_dat, "ExpressionSet") | is.data.frame(healthy_dat))){
+    stop("Healthy data provided is not a data frame or ExpressionSet.")
   }
-  if(!is.data.frame(dat)){
-    stop("Error: Data provided is not a data frame.")
+  if(!(is(dat, "ExpressionSet") | is.data.frame(dat))){
+    stop("Data provided is not a data frame or ExpressionSet.")
+  }
+  if(is(healthy_dat, "ExpressionSet")){
+    healthy_dat = as.data.frame(t(exprs(healthy_dat)))
+  }
+  if(is(dat, "ExpressionSet")){
+    dat = as.data.frame(t(exprs(dat)))
+  }
+  if (sum(grepl("[^0-9]", colnames(dat))) > 0 ){
+    stop("Data provided does not have Entrez ID as gene identifier column names.")
+  }
+  if (sum(grepl("[^0-9]", colnames(healthy_dat))) > 0 ){
+    stop("Healthy data provided does not have Entrez ID as gene identifier column names.")
   }
   
   #check number of columns of healthy data and data are the same

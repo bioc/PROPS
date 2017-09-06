@@ -13,10 +13,10 @@ props(healthy_dat, dat, pathway_edges = NULL, batch_correct = FALSE, healthy_bat
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{healthy_dat}{
-Data frame of healthy data used to parameterize the pathways. Healthy data should be formatted as one sample per row, and columns should correspond to genes and be named by the gene Entrez ID.
+Data frame or ExpressionSet of healthy data used to parameterize the pathways. Healthy data frame should be formatted as one sample per row, and columns should correspond to genes and be named by the gene Entrez ID. If using ExpressionSet, map row.names probes to corresponding Entrez IDs before proceeding.
 }
   \item{dat}{
-Data frame of patient data for which to calculate pathway-based scores. Data should be formatted as one sample per row, and columns should correspond to genes and be named by the gene Entrez ID.
+Data frame or ExpressionSet of patient data for which to calculate pathway-based scores. Data frame should be formatted as one sample per row, and columns should correspond to genes and be named by the gene Entrez ID. If using ExpressionSet, map row.names probes to corresponding Entrez IDs before proceeding.
 }
   \item{pathway_edges}{
 Optional user specified pathway edges. If no pathway edges are provided, KEGG pathways are used by default. User input edges should be a data frame with 3 columns, where columns 1 and 2 are the source (from) and sink (to) of the edge, and column 3 is the pathway ID or name the edge belongs to. Genes should be named by Entrez ID.

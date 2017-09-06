@@ -2,6 +2,7 @@ exportPattern("^[[:alpha:]]+")
 import(bnlearn)
 import(reshape2)
 import(sva)
+import(Biobase)
 importFrom("stats", "logLik")
 importFrom("utils", "data")
 

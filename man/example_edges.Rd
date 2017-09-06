@@ -5,7 +5,7 @@
 Example pathway edges. Contains 3 randomly generated pathways.
 }
 \description{
-Example pathway edges. Contains 3 randomly generated pathways. User input edges should be a data frame with 3 columns, where columns 1 and 2 are the source (from) and sink (to) of the edge, and column 3 is the pathway ID or name the edge belongs to.
+Example pathway edges. Contains 3 randomly generated pathways. User input edges should be a data frame with 3 columns, where columns 1 and 2 are the source (from) and sink (to) of the edge, and column 3 is the pathway ID or pathway name the edge belongs to. Gene IDs should be Entrez ID.
 }
 \usage{data("example_edges")}
 \format{
