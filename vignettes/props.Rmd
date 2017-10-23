@@ -52,7 +52,7 @@ knitr::kable(props_features[1:5,1:5])
 As part of this package, we have included an optional flag to use ComBat via the sva package. Let us have two batches of data, where the first 50 samples from example_healthy and first 20 samples from example_data are from batch 1, and the remaining are from batch 2. Run the props command with batch_correct as TRUE, followed by the batch numbers.
 
 ```{r, results = FALSE}
-healthy_batches = c(rep(1, 50), rep(2, 50))
+healthy_batches = c(rep(1, 25), rep(2, 25))
 dat_batches = c(rep(1, 20), rep(2, 30))
 
 props_features_batchcorrected <- props(example_healthy, example_data, batch_correct = TRUE, healthy_batches = healthy_batches, dat_batches = dat_batches)
