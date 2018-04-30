@@ -1,7 +1,7 @@
 Package: PROPS
 Type: Package
 Title: PRObabilistic Pathway Score (PROPS)
-Version: 1.2.0
+Version: 1.3.0
 Date: 2017-10-23
 Author: Lichy Han
 Maintainer: Lichy Han <lhan2@stanford.edu>
