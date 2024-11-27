@@ -83,7 +83,7 @@ function(healthy_dat, dat, pathway_edges = NULL, batch_correct = FALSE, healthy_
       pathway_bn <- bn.fit(pathway_graph, as.data.frame(healthy_dat[,colnames(healthy_dat) %in% c(edgelist[,1], edgelist[,2])]))
       sample_LL <- logLik(pathway_bn, dat[,colnames(dat) %in% c(edgelist[,1], edgelist[,2])], by.sample = TRUE)
       if (!is.na(sum(sample_LL))){
-        LL <- rbind(LL, data.frame(pathway_ID = all_pathways[i], t(sample_LL), stringsAsFactors = FALSE))
+        LL <- rbind(LL, data.frame(pathway_ID = all_pathways[i], t(as.numeric(sample_LL)), stringsAsFactors = FALSE))
       }
     }
     
